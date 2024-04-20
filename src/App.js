@@ -4,18 +4,22 @@ import Footer from "./Footer"
 import React, { useState } from 'react'
 import AddItems from "./AddItems"
 import SearchList from "./SearchList"
-
+import { useEffect } from "react"
 
 
 export default function App(){
-  const [item,setItem] = useState(JSON.parse(localStorage.getItem('todo_list'))) 
+  const [item,setItem] = useState([]) 
 
 
   const [newItem,setNewItem]=useState('')
   const [search,SetSearch] = useState('')
 
 
-    const addItem = (newItem) => {
+  useEffect(()=>{
+    JSON.parse(localStorage.getItem('todo_list'))
+  },[])
+
+  const addItem = (newItem) => {
   const id = item.length ? item[item.length - 1].id + 1 : 1;
   const addNewItems = { id, checked: false, item: newItem }; 
   const listItems = [...item, addNewItems];
